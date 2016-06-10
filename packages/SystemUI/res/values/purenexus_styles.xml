@@ -38,9 +38,7 @@
     <!-- Battery meter drawable styles -->
     <style name="BatteryMeterViewDrawable.Portrait"/>
     <style name="BatteryMeterViewDrawable.Landscape"/>
-    <style name="BatteryMeterViewDrawable.Circle">
-        <item name="blendMode">overlay</item>
-    </style>
+    <style name="BatteryMeterViewDrawable.Circle"/>
 
     <!-- Pixel home dot style -->
     <style name="DotStyle">

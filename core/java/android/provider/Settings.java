@@ -3930,7 +3930,14 @@ public final class Settings {
                 "notification_light_screen_on_enable";
 
         /**
+         * Quick Settings weather provider
+         * @hide
+         */
+        public static final String OMNIJAWS_WEATHER_ICON_PACK = "omnijaws_weather_icon_pack";
+
+        /**
          * Whether to enable the pixel navbar animation
+         *
          * @hide
          */
         public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";

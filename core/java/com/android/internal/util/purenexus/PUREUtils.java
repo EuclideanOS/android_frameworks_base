@@ -31,6 +31,16 @@ public class PUREUtils {
                Locale.CHINESE.getLanguage());
     }
 
+    public static boolean isAppInstalled(Context context, String appUri) {
+        try {
+            PackageManager pm = context.getPackageManager();
+            pm.getPackageInfo(appUri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static boolean isAvailableApp(String packageName, Context context) {
         Context mContext = context;
         final PackageManager pm = mContext.getPackageManager();
@@ -43,7 +53,7 @@ public class PUREUtils {
             return false;
         }
     }
-    
+
     public static boolean isWifiOnly(Context context) {
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(
                 Context.CONNECTIVITY_SERVICE);

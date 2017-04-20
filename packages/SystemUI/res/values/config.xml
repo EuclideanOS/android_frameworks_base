@@ -291,4 +291,6 @@
          If < 0, uses the value from HardwarePropertiesManager#getDeviceTemperatures. -->
     <integer name="config_warningTemperature">-1</integer>
 
+    <!-- When true, show the AutoBrightness imageview -->
+    <bool name="config_show_auto_brightness">true</bool>
 </resources>

@@ -41,12 +41,16 @@ import android.provider.Settings;
 import com.android.systemui.R;
 
 public class OmniJawsClient {
+    private static final String TAG = "SystemUI:OmniJawsClient";
+    private static final boolean DEBUG = false;
     public static final String SERVICE_PACKAGE = "org.omnirom.omnijaws";
     public static final Uri WEATHER_URI = Uri.parse("content://org.omnirom.omnijaws.provider/weather");
     public static final Uri SETTINGS_URI = Uri.parse("content://org.omnirom.omnijaws.provider/settings");
 
     private static final String ICON_PACKAGE_DEFAULT = "org.omnirom.omnijaws";
     private static final String ICON_PREFIX_DEFAULT = "weather";
+    private static final String EXTRA_ERROR = "error";
+    public static final int EXTRA_ERROR_DISABLED = 2;
 
     public static final String[] WEATHER_PROJECTION = new String[]{
             "city",
@@ -111,7 +115,7 @@ public class OmniJawsClient {
 
     public static interface OmniJawsObserver {
         public void weatherUpdated();
-        public void weatherError();
+        public void weatherError(int errorReason);
     }
 
     private class WeatherUpdateReceiver extends BroadcastReceiver {
@@ -123,7 +127,8 @@ public class OmniJawsClient {
                     observer.weatherUpdated();
                 }
                 if (action.equals(WEATHER_ERROR)) {
-                    observer.weatherError();
+                    int errorReason = intent.getIntExtra(EXTRA_ERROR, 0);
+                    observer.weatherError(errorReason);
                 }
             }
         }

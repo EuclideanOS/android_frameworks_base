@@ -47,9 +47,6 @@ import java.util.Date;
 
 public class DetailedWeatherView extends LinearLayout {
 
-    static final String TAG = "DetailedWeatherView";
-    static final boolean DEBUG = false;
-
     private TextView mWeatherCity;
     private TextView mWeatherTimestamp;
     private TextView mWeatherData;
@@ -73,7 +70,6 @@ public class DetailedWeatherView extends LinearLayout {
     private TextView mCurrentText;
     private ImageView mRefresh;
     private View mConditionLine;
-    private View mProgressContainer;
 
     /** The background colors of the app, it changes thru out the day to mimic the sky. **/
     public static final String[] BACKGROUND_SPECTRUM = { "#212121", "#27232e", "#2d253a",
@@ -105,7 +101,6 @@ public class DetailedWeatherView extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         mConditionLine = findViewById(R.id.condition_line);
-        mProgressContainer = findViewById(R.id.progress_container);
         mWeatherCity  = (TextView) findViewById(R.id.current_weather_city);
         mWeatherTimestamp  = (TextView) findViewById(R.id.current_weather_timestamp);
         mWeatherData  = (TextView) findViewById(R.id.current_weather_data);
@@ -131,8 +126,6 @@ public class DetailedWeatherView extends LinearLayout {
         mRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressContainer.setVisibility(View.VISIBLE);
-                mConditionLine.setVisibility(View.GONE);
                 forceRefreshWeatherSettings();
             }
         });
@@ -149,16 +142,17 @@ public class DetailedWeatherView extends LinearLayout {
     }
 
     public void updateWeatherData(OmniJawsClient.WeatherInfo weatherData) {
-        mConditionLine.setVisibility(View.VISIBLE);
-        mProgressContainer.setVisibility(View.GONE);
-
         if (weatherData == null) {
+            mConditionLine.setVisibility(View.GONE);
+            mWeatherCity.setVisibility(View.GONE);
+            mWeatherTimestamp.setVisibility(View.GONE);
             mWeatherData.setVisibility(View.GONE);
             mNoWeatherNotice.setVisibility(View.VISIBLE);
             mNoWeatherNotice.setText(getResources().getString(R.string.omnijaws_service_unkown));
             return;
         }
         mNoWeatherNotice.setVisibility(View.GONE);
+        mConditionLine.setVisibility(View.VISIBLE);
         mWeatherCity.setVisibility(View.VISIBLE);
         mWeatherTimestamp.setVisibility(View.VISIBLE);
         mWeatherData.setVisibility(View.VISIBLE);
@@ -280,13 +274,12 @@ public class DetailedWeatherView extends LinearLayout {
         return Color.parseColor(BACKGROUND_SPECTRUM[hourOfDay]);
     }
 
-    public void weatherError(int errorReason) {
-        mConditionLine.setVisibility(View.VISIBLE);
-        mProgressContainer.setVisibility(View.GONE);
+    public void weatherError() {
+        mConditionLine.setVisibility(View.GONE);
+        mWeatherCity.setVisibility(View.GONE);
+        mWeatherTimestamp.setVisibility(View.GONE);
         mWeatherData.setVisibility(View.GONE);
         mNoWeatherNotice.setVisibility(View.VISIBLE);
-        mNoWeatherNotice.setText(errorReason == OmniJawsClient.EXTRA_ERROR_DISABLED ?
-            getResources().getString(R.string.omnijaws_service_disabled) :
-            getResources().getString(R.string.omnijaws_service_error_long));
+        mNoWeatherNotice.setText(getResources().getString(R.string.omnijaws_service_error_long));
     }
 }

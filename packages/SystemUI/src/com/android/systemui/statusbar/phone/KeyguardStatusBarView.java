@@ -198,7 +198,8 @@ public class KeyguardStatusBarView extends RelativeLayout
         if (mForceBatteryText != null) {
             mBatteryLevel.setVisibility(mForceBatteryText ? View.VISIBLE : View.GONE);
         } else {
-            mBatteryLevel.setVisibility(mShowBatteryText ? View.VISIBLE : View.GONE);
+            mBatteryLevel.setVisibility(
+                    mBatteryCharging || mShowBatteryText ? View.VISIBLE : View.GONE);
         }
 
         if (mCarrierLabel != null) {
@@ -252,9 +253,7 @@ public class KeyguardStatusBarView extends RelativeLayout
 
     public void setBatteryController(BatteryController batteryController) {
         mBatteryController = batteryController;
-        final BatteryMeterView mBatteryMeter = (BatteryMeterView) findViewById(R.id.battery);
-        mBatteryMeter.setBatteryController(batteryController);
-        mBatteryMeter.setChargingAnimationsEnabled(true);
+        ((BatteryMeterView) findViewById(R.id.battery)).setBatteryController(batteryController);
     }
 
     public void setUserSwitcherController(UserSwitcherController controller) {

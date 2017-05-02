@@ -143,6 +143,8 @@ public class BatteryMeterDrawable extends Drawable implements
     private int mCurrentBackgroundColor = 0;
     private int mCurrentFillColor = 0;
 
+    private int mStyle;
+
     public BatteryMeterDrawable(Context context, Handler handler, int frameColor) {
         // Portrait is the default drawable style
         this(context, handler, frameColor, BATTERY_STYLE_PORTRAIT);
@@ -151,6 +153,7 @@ public class BatteryMeterDrawable extends Drawable implements
     public BatteryMeterDrawable(Context context, Handler handler, int frameColor, int style) {
         mContext = context;
         mHandler = handler;
+        mStyle = style;
         final Resources res = context.getResources();
         TypedArray levels = res.obtainTypedArray(R.array.batterymeter_color_levels);
         TypedArray colors = res.obtainTypedArray(R.array.batterymeter_color_values);

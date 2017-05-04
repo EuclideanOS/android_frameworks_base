@@ -90,6 +90,7 @@ public class BatteryMeterDrawable extends Drawable implements
     private String mWarningString;
     private final int mCriticalLevel;
     private int mChargeColor;
+    private int mStyle;
     private final Path mBoltPath = new Path();
     private final Path mPlusPath = new Path();
 

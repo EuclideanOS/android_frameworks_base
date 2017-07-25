@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:clipChildren="true"
         android:clipToPadding="true"
-        android:layout_gravity="center" >
+        android:layout_gravity="center">
 
         <ImageView android:id="@+id/background_image"
             android:layout_width="match_parent"
@@ -94,7 +94,7 @@
             android:clipToPadding="false"
             android:clickable="true"
             android:focusable="true"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/ripple_drawable"
             android:contentDescription="@string/accessibility_quick_settings_expand"
             android:padding="12dp" />
 

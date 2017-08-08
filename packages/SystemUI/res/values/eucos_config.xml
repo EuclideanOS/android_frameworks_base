@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2017 The Pure Nexus Project
+     Copyright (C) 2017 Euclidean OS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,6 +15,11 @@
      limitations under the License.
 -->
 <resources>
-     <!-- Largest size an avatar might need to be drawn in the power menu user picker -->
-     <dimen name="global_actions_avatar_size">40dp</dimen>
+    <!-- Allow Opa (Pixel navbar) layout -->
+    <bool name="config_allowOpaLayout">true</bool>
+
+    <!-- Clear-All recents FAB animation -->
+    <integer name="recents_animate_fab_enter_duration">225</integer>
+    <integer name="recents_animate_fab_enter_delay">275</integer>
+    <integer name="recents_animate_fab_exit_duration">125</integer>
 </resources>
